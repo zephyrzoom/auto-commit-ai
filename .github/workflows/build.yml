@@ -22,7 +22,7 @@ jobs:
 
       - name: Build EXE
         run: |
-          pyinstaller --windowed --onefile --name "GitSyncTool" main.py
+          pyinstaller --windowed --onefile --name "GitSyncTool" --collect-all PyQt6 main.py
 
       - name: Upload EXE
         uses: actions/upload-artifact@v4
