@@ -1,8 +1,8 @@
-name: Build Windows EXE
+name: Build Windows Portable
 
 on:
   push:
-    branches: [main, master]
+    branches: [main, master, electron]
   workflow_dispatch:
 
 jobs:
@@ -12,20 +12,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: "3.12"
+          node-version: "20"
+          cache: "npm"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt pyinstaller
+        run: npm ci
 
-      - name: Build EXE
-        run: |
-          pyinstaller --windowed --onefile --name "GitSyncTool" --collect-all PyQt6 main.py
+      - name: Build portable exe
+        run: npm run build:win
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload EXE
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: GitSyncTool-windows
-          path: dist/GitSyncTool.exe
+          name: GitSyncTool-portable
+          path: dist/*.exe

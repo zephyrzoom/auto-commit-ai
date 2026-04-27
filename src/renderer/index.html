@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
+  <title>Git 同步工具</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Git 同步工具</h1>
+
+    <!-- 状态信息 -->
+    <div class="section">
+      <h2 class="section-title">状态信息</h2>
+      <div class="status-grid">
+        <div class="status-item">
+          <span class="status-label">上次同步:</span>
+          <span id="lastSyncTime" class="status-value">从未同步</span>
+        </div>
+        <div class="status-item">
+          <span class="status-label">下次同步:</span>
+          <span id="nextRunTime" class="status-value">未设置</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 操作按钮 -->
+    <div class="actions">
+      <button id="btnSync" class="btn btn-primary">立即同步</button>
+      <button id="btnConfig" class="btn btn-secondary">配置</button>
+    </div>
+
+    <!-- 进度条 -->
+    <div id="progressBar" class="progress-bar" style="display: none;">
+      <div class="progress-bar-inner"></div>
+    </div>
+
+    <!-- 日志区域 -->
+    <div class="section log-section">
+      <div class="log-header">
+        <h2 class="section-title">日志</h2>
+        <button id="btnClearLog" class="btn btn-small">清空日志</button>
+      </div>
+      <div id="logArea" class="log-area"></div>
+    </div>
+  </div>
+
+  <!-- 配置弹窗 -->
+  <dialog id="configDialog" class="config-dialog">
+    <div class="dialog-content">
+      <h2>配置</h2>
+      <form id="configForm">
+        <div class="form-group">
+          <label for="repoUrl">仓库 URL <span class="required">*</span></label>
+          <input type="text" id="repoUrl" placeholder="https://github.com/user/repo.git" required>
+        </div>
+        <div class="form-group">
+          <label for="username">用户名 <span class="required">*</span></label>
+          <input type="text" id="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">密码 <span class="required">*</span></label>
+          <input type="password" id="password" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sourceBranch">源分支</label>
+            <input type="text" id="sourceBranch" placeholder="main">
+          </div>
+          <div class="form-group">
+            <label for="targetBranch">目标分支 <span class="required">*</span></label>
+            <input type="text" id="targetBranch" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="userName">您的姓名 <span class="required">*</span></label>
+            <input type="text" id="userName" required>
+          </div>
+          <div class="form-group">
+            <label for="userEmail">您的邮箱 <span class="required">*</span></label>
+            <input type="email" id="userEmail" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="syncTime">每日同步时间</label>
+          <input type="time" id="syncTime" value="00:00">
+        </div>
+        <div class="dialog-actions">
+          <button type="button" id="btnCancel" class="btn btn-secondary">取消</button>
+          <button type="submit" class="btn btn-primary">保存</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <script src="config-dialog.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
