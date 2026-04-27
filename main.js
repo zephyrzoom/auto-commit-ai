@@ -1,5 +1,9 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+
+if (process.platform === 'linux') {
+  app.commandLine.appendSwitch('no-sandbox');
+}
 const { ConfigManager } = require('./src/services/config-manager');
 const { GitService } = require('./src/services/git-service');
 const { SyncScheduler } = require('./src/services/scheduler');
