@@ -20,6 +20,14 @@
     ],
     "win": {
       "target": "portable"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": ["arm64"]
+        }
+      ]
     }
   },
   "dependencies": {
