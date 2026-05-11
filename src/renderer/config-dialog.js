@@ -46,8 +46,8 @@ const configDialog = (() => {
 
   btnCancel.addEventListener('click', close);
 
-  dialog.addEventListener('click', (e) => {
-    if (e.target === dialog) close();
+  dialog.addEventListener('cancel', (e) => {
+    e.preventDefault();
   });
 
   return { open, close };
