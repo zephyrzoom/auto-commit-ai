@@ -3,7 +3,7 @@ const configDialog = (() => {
   const form = document.getElementById('configForm');
   const btnCancel = document.getElementById('btnCancel');
 
-  const fields = ['repoUrl', 'username', 'password', 'sourceBranch', 'targetBranch', 'userName', 'userEmail', 'syncTime'];
+  const fields = ['sourceRepoUrl', 'targetRepoUrl', 'username', 'password', 'sourceBranch', 'targetBranch', 'userName', 'userEmail', 'syncTime'];
 
   async function open() {
     const config = await window.api.getConfig();

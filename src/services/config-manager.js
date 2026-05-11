@@ -49,8 +49,11 @@ class ConfigManager {
     }
   }
 
-  get repoUrl() { return this.store.get('repoUrl', ''); }
-  set repoUrl(v) { this.store.set('repoUrl', v); }
+  get sourceRepoUrl() { return this.store.get('sourceRepoUrl', ''); }
+  set sourceRepoUrl(v) { this.store.set('sourceRepoUrl', v); }
+
+  get targetRepoUrl() { return this.store.get('targetRepoUrl', ''); }
+  set targetRepoUrl(v) { this.store.set('targetRepoUrl', v); }
 
   get username() { return this.store.get('username', ''); }
   set username(v) { this.store.set('username', v); }
@@ -80,13 +83,14 @@ class ConfigManager {
   set lastSyncTime(v) { this.store.set('lastSyncTime', v); }
 
   get isConfigured() {
-    return !!(this.repoUrl && this.username && this.password &&
-              this.targetBranch && this.userName && this.userEmail);
+    return !!(this.sourceRepoUrl && this.targetRepoUrl && this.username && this.password &&
+              this.sourceBranch && this.targetBranch && this.userName && this.userEmail);
   }
 
   getAll() {
     return {
-      repoUrl: this.repoUrl,
+      sourceRepoUrl: this.sourceRepoUrl,
+      targetRepoUrl: this.targetRepoUrl,
       username: this.username,
       password: this.password,
       sourceBranch: this.sourceBranch,
@@ -101,7 +105,8 @@ class ConfigManager {
   }
 
   saveAll(data) {
-    if (data.repoUrl !== undefined) this.repoUrl = data.repoUrl;
+    if (data.sourceRepoUrl !== undefined) this.sourceRepoUrl = data.sourceRepoUrl;
+    if (data.targetRepoUrl !== undefined) this.targetRepoUrl = data.targetRepoUrl;
     if (data.username !== undefined) this.username = data.username;
     if (data.password !== undefined) this.password = data.password;
     if (data.sourceBranch !== undefined) this.sourceBranch = data.sourceBranch;
