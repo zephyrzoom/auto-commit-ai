@@ -22,7 +22,8 @@ logDebug(`env XDG_RUNTIME_DIR: ${process.env.XDG_RUNTIME_DIR}`);
 if (process.platform === 'linux') {
   app.commandLine.appendSwitch('no-sandbox');
   app.commandLine.appendSwitch('disable-gpu');
-  logDebug('Linux: 已添加 --no-sandbox --disable-gpu');
+  app.commandLine.appendSwitch('disable-software-rasterizer');
+  logDebug('Linux: 已添加 --no-sandbox --disable-gpu --disable-software-rasterizer');
 }
 
 process.on('uncaughtException', (err) => {
