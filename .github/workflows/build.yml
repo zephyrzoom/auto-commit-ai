@@ -45,6 +45,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Use Electron 20.0.3 for Linux
+        run: npm install electron@20.0.3 --save-dev
+
       - name: Build Linux arm64
         run: npm run build:linux -- --arm64
         env:
